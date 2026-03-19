@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yonanss | Projects</title>
+  <style>
+    :root { --bg:#0b1020; --panel:rgba(255,255,255,.07); --line:rgba(255,255,255,.12); --text:#e8eefc; --muted:#9fb0d0; --accent:#7dd3fc; --accent2:#a78bfa; --shadow:0 20px 60px rgba(0,0,0,.35); --max:1120px; }
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--text);background:radial-gradient(circle at top left, rgba(125,211,252,.18), transparent 28%),radial-gradient(circle at bottom right, rgba(167,139,250,.18), transparent 30%),linear-gradient(180deg,#0b1020,#111831 55%,#0b1020)}
+    a{text-decoration:none;color:inherit}.wrap{width:min(var(--max),calc(100% - 32px));margin:0 auto}.nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(14px);background:rgba(11,16,32,.55);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-inner{display:flex;justify-content:space-between;align-items:center;padding:16px 0}.brand{font-weight:800}.brand span{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .nav-links{display:flex;gap:18px;color:var(--muted);font-size:14px}.nav-links a:hover{color:var(--text)}
+    .hero{padding:76px 0 32px}.eyebrow{color:var(--accent);font-size:13px;text-transform:uppercase;letter-spacing:.16em}.hero h1{margin:10px 0 12px;font-size:clamp(36px,6vw,64px);letter-spacing:-.04em}
+    .hero p{max-width:760px;color:var(--muted);font-size:18px;line-height:1.7}.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 18px;border-radius:14px;font-weight:700;transition:transform .2s ease}.btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#07111f;box-shadow:0 12px 30px rgba(125,211,252,.22)}.btn-secondary{border:1px solid var(--line);background:rgba(255,255,255,.04)}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;padding:20px 0 50px}.card{border:1px solid var(--line);border-radius:24px;padding:24px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.04));box-shadow:var(--shadow)}
+    .card small{color:var(--accent);letter-spacing:.08em;text-transform:uppercase}.card h3{margin:10px 0;font-size:24px}.card p{margin:0 0 16px;color:var(--muted);line-height:1.8}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}.chip{padding:8px 10px;border-radius:999px;font-size:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--muted)}
+    .process{padding:12px 0 60px}.section-head h2{font-size:clamp(28px,4vw,42px);margin:8px 0}.section-head p,.step p,footer{color:var(--muted)}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}.step{border:1px solid var(--line);border-radius:22px;padding:22px;background:var(--panel);box-shadow:var(--shadow)}.step strong{display:block;font-size:18px;margin-bottom:10px}
+    footer{padding:24px 0 50px;font-size:14px}
+    @media (max-width:960px){.grid,.steps{grid-template-columns:1fr}.nav-links{display:none}}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand"><span>Yonanss</span> Projects</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#featured">Featured</a>
+        <a href="#process">Process</a>
+        <a href="https://github.com/yonanss" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </div>
+  </nav>
+  <header class="hero wrap">
+    <div class="eyebrow">Projects Page</div>
+    <h1>프로젝트를 조금 더 자세하게 보여주는 두 번째 페이지</h1>
+    <p>메인 페이지가 첫인상을 담당한다면, 이 페이지는 작업물과 작업 방식, 앞으로 확장할 방향을 보여주는 프로젝트 전용 공간입니다.</p>
+    <div class="cta-row"><a class="btn btn-primary" href="index.html">메인으로 돌아가기</a><a class="btn btn-secondary" href="https://github.com/yonanss/yonanss-homepage" target="_blank" rel="noreferrer">Repo 보기</a></div>
+  </header>
+  <section id="featured" class="wrap">
+    <div class="grid">
+      <article class="card">
+        <small>Live Project</small>
+        <h3>Yonanss Homepage</h3>
+        <p>개인 브랜딩과 개발자 포트폴리오를 동시에 보여주기 위해 제작한 사이트입니다. 다크 톤 배경, 카드 UI, 그라데이션 포인트를 중심으로 시각적인 완성도를 높였습니다.</p>
+        <div class="chips"><span class="chip">Portfolio</span><span class="chip">Responsive</span><span class="chip">Static Site</span><span class="chip">GitHub Pages</span></div>
+        <div class="cta-row"><a class="btn btn-primary" href="index.html">Live Home</a><a class="btn btn-secondary" href="https://github.com/yonanss/yonanss-homepage" target="_blank" rel="noreferrer">Source Code</a></div>
+      </article>
+      <article class="card">
+        <small>Coming Soon</small>
+        <h3>Next Portfolio Project</h3>
+        <p>다음 프로젝트는 JavaScript 인터랙션, 스크롤 애니메이션, 더 구체적인 케이스 스터디를 담은 페이지로 확장할 계획입니다.</p>
+        <div class="chips"><span class="chip">JavaScript</span><span class="chip">Animation</span><span class="chip">Case Study</span></div>
+        <div class="cta-row"><a class="btn btn-secondary" href="https://github.com/yonanss" target="_blank" rel="noreferrer">GitHub Profile</a></div>
+      </article>
+    </div>
+  </section>
+  <section id="process" class="process wrap">
+    <div class="section-head">
+      <div class="eyebrow">Process</div>
+      <h2>작업할 때 중요하게 보는 것</h2>
+      <p>예쁜 화면을 만드는 것에서 끝나지 않고, 구조와 사용성까지 함께 챙기는 흐름으로 작업합니다.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><strong>1. 구조 설계</strong><p>사용자가 가장 먼저 봐야 할 정보부터 배치해 흐름이 자연스럽도록 설계합니다.</p></div>
+      <div class="step"><strong>2. 시각 디자인</strong><p>색감, 간격, 카드 스타일, 타이포를 정리해 포트폴리오 전체 톤을 맞춥니다.</p></div>
+      <div class="step"><strong>3. 배포와 개선</strong><p>GitHub Pages로 바로 배포하고 실제 화면을 보며 반복적으로 다듬습니다.</p></div>
+    </div>
+  </section>
+  <footer><div class="wrap">© 2026 Yonanss. Two-page portfolio site.</div></footer>
+</body>
+</html>
