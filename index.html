@@ -1,29 +1,355 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yonanss</title>
-<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Pretendard',sans-serif;}
-body{background:linear-gradient(135deg,#0f172a,#1e293b);color:#e2e8f0;overflow:hidden;}
-.container{display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;text-align:center;}
-.glow{font-size:3rem;font-weight:800;background:linear-gradient(90deg,#38bdf8,#a78bfa);-webkit-background-clip:text;color:transparent;}
-.subtitle{margin-top:10px;color:#94a3b8;}
-.btn{margin-top:30px;padding:12px 28px;border-radius:999px;background:linear-gradient(90deg,#38bdf8,#a78bfa);color:#0f172a;text-decoration:none;font-weight:600;transition:0.3s;}
-.btn:hover{transform:scale(1.1);}
-.circle{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,#38bdf855,transparent);top:-100px;left:-100px;filter:blur(80px);}
-.circle2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,#a78bfa55,transparent);bottom:-100px;right:-100px;filter:blur(80px);}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yonanss | Developer Portfolio</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: rgba(255,255,255,0.08);
+      --line: rgba(255,255,255,0.12);
+      --text: #e5eefc;
+      --muted: #9fb0d0;
+      --accent: #7dd3fc;
+      --accent2: #a78bfa;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(125,211,252,0.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(167,139,250,0.18), transparent 30%),
+        linear-gradient(180deg, #0b1020, #111831 55%, #0b1020);
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+    .nav {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(11,16,32,0.55);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 0;
+    }
+    .brand { font-weight: 800; letter-spacing: 0.4px; }
+    .brand span {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .nav-links { display: flex; gap: 18px; color: var(--muted); font-size: 14px; }
+    .nav-links a:hover { color: var(--text); }
+
+    .hero { padding: 88px 0 56px; }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; align-items: center;
+    }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px;
+      background: rgba(255,255,255,0.04); color: var(--muted); font-size: 14px;
+    }
+    h1 {
+      margin: 18px 0 16px; line-height: 1.05;
+      font-size: clamp(42px, 7vw, 76px);
+      letter-spacing: -0.04em;
+    }
+    .gradient {
+      background: linear-gradient(90deg, #f8fbff, var(--accent), var(--accent2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .lead {
+      max-width: 700px; color: var(--muted); font-size: 18px; line-height: 1.7;
+    }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 18px; border-radius: 14px; font-weight: 700;
+      transition: transform .2s ease, opacity .2s ease, border-color .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(90deg, var(--accent), var(--accent2)); color: #07111f;
+      box-shadow: 0 12px 30px rgba(125,211,252,0.22);
+    }
+    .btn-secondary {
+      border: 1px solid var(--line); background: rgba(255,255,255,0.04); color: var(--text);
+    }
+    .stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px;
+    }
+    .stat {
+      padding: 18px; border: 1px solid var(--line); border-radius: 20px;
+      background: var(--panel); box-shadow: var(--shadow);
+    }
+    .stat strong { display: block; font-size: 28px; margin-bottom: 6px; }
+    .stat span { color: var(--muted); font-size: 14px; }
+
+    .hero-card {
+      position: relative; overflow: hidden;
+      border: 1px solid var(--line); border-radius: 28px; padding: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+      box-shadow: var(--shadow);
+      min-height: 420px;
+    }
+    .hero-card::before {
+      content: ""; position: absolute; inset: auto -60px -60px auto; width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(167,139,250,0.35), transparent 60%);
+    }
+    .terminal {
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; overflow: hidden;
+      background: rgba(7,12,25,0.82);
+    }
+    .terminal-top { display:flex; gap:8px; padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.35); }
+    .terminal-body { padding: 18px; font-size: 14px; line-height: 1.8; color: #cfe3ff; }
+    .terminal-body .muted { color: #7d93b8; }
+    .tag-row { display:flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .tag {
+      padding: 10px 12px; border-radius: 999px; font-size: 13px; color: var(--muted);
+      border: 1px solid var(--line); background: rgba(255,255,255,0.03);
+    }
+
+    section { padding: 36px 0; }
+    .section-head { margin-bottom: 18px; }
+    .eyebrow { color: var(--accent); font-size: 13px; text-transform: uppercase; letter-spacing: .16em; }
+    .section-head h2 { margin: 10px 0 8px; font-size: clamp(28px, 4vw, 42px); }
+    .section-head p { color: var(--muted); max-width: 700px; }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card {
+      border: 1px solid var(--line); border-radius: 22px; padding: 22px;
+      background: rgba(255,255,255,0.05); box-shadow: var(--shadow);
+    }
+    .card h3 { margin: 0 0 10px; font-size: 20px; }
+    .card p { margin: 0; color: var(--muted); line-height: 1.7; }
+
+    .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .project {
+      border: 1px solid var(--line); border-radius: 24px; padding: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      box-shadow: var(--shadow);
+    }
+    .project small { color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; }
+    .project h3 { margin: 10px 0 10px; font-size: 24px; }
+    .project p { margin: 0 0 16px; color: var(--muted); line-height: 1.7; }
+    .chips { display:flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .chip {
+      padding: 8px 10px; border-radius: 999px; font-size: 12px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--line); color: var(--muted);
+    }
+
+    .contact {
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px; align-items: stretch;
+    }
+    .contact-panel {
+      border: 1px solid var(--line); border-radius: 24px; padding: 24px;
+      background: rgba(255,255,255,0.05); box-shadow: var(--shadow);
+    }
+    .contact-list { display:grid; gap: 12px; margin-top: 18px; }
+    .contact-item {
+      display:flex; justify-content: space-between; gap: 12px; padding: 14px 16px;
+      border-radius: 16px; border: 1px solid var(--line); background: rgba(255,255,255,0.03);
+    }
+    .contact-item span { color: var(--muted); }
+
+    footer { padding: 24px 0 50px; color: var(--muted); font-size: 14px; }
+
+    @media (max-width: 960px) {
+      .hero-grid, .contact, .projects, .grid-3 { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hero { padding-top: 64px; }
+      body { overflow-x: hidden; }
+    }
+  </style>
 </head>
 <body>
-<div class="circle"></div>
-<div class="circle2"></div>
-<div class="container">
-<h1 class="glow">Yonanss 🚀</h1>
-<p class="subtitle">Welcome to my aesthetic website</p>
-<a class="btn" href="https://github.com/yonanss">GitHub</a>
-</div>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand"><span>Yonanss</span> Portfolio</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="kicker">💻 Frontend · Web · Product-minded Developer</div>
+        <h1>
+          사용자 경험을 만드는<br />
+          <span class="gradient">개발자 포트폴리오</span>
+        </h1>
+        <p class="lead">
+          안녕하세요. 깔끔한 UI, 빠른 인터랙션, 유지보수 가능한 구조를 좋아하는 개발자입니다.
+          보기 좋은 화면을 넘어서 실제로 쓰기 편한 제품을 만드는 데 집중합니다.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://github.com/yonanss" target="_blank" rel="noreferrer">GitHub 보기</a>
+          <a class="btn btn-secondary" href="#projects">프로젝트 보기</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong>01</strong><span>Public Repository</span></div>
+          <div class="stat"><strong>UI</strong><span>깔끔하고 감성적인 인터페이스</span></div>
+          <div class="stat"><strong>Fast</strong><span>빠른 로딩과 반응성 중심</span></div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="terminal">
+          <div class="terminal-top">
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+          <div class="terminal-body">
+            <div><span class="muted">$</span> whoami</div>
+            <div>yonanss</div>
+            <div style="margin-top:12px;"><span class="muted">$</span> focus --now</div>
+            <div>"Building delightful web experiences"</div>
+            <div style="margin-top:12px;"><span class="muted">$</span> stack</div>
+            <div>HTML / CSS / JavaScript / GitHub</div>
+            <div style="margin-top:12px;"><span class="muted">$</span> status</div>
+            <div>Open to building cool things 🚀</div>
+          </div>
+        </div>
+        <div class="tag-row">
+          <div class="tag">Responsive Web</div>
+          <div class="tag">Clean UI</div>
+          <div class="tag">Performance</div>
+          <div class="tag">Developer Portfolio</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">About</div>
+        <h2>좋은 제품은 디테일에서 나온다고 믿습니다.</h2>
+        <p>사용자의 시선 흐름, 정보 구조, 반응 속도까지 신경 쓰며 웹사이트를 설계합니다. 보기 좋은 것과 사용하기 쉬운 것 사이의 균형을 중요하게 생각합니다.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <h3>UI 설계</h3>
+          <p>정보가 한눈에 들어오도록 레이아웃을 구성하고, 색감과 타이포를 통해 브랜드 인상을 만듭니다.</p>
+        </div>
+        <div class="card">
+          <h3>반응형 구현</h3>
+          <p>모바일과 데스크톱 모두에서 자연스럽게 보이도록 화면 크기에 맞춘 반응형 구조를 만듭니다.</p>
+        </div>
+        <div class="card">
+          <h3>사용자 경험</h3>
+          <p>버튼, 카드, 섹션 전환 같은 작은 인터랙션까지 다듬어 더 매끄러운 경험을 제공합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Skills</div>
+        <h2>현재 사용 중인 기술</h2>
+        <p>기초가 탄탄한 웹 기술을 바탕으로, 빠르고 읽기 쉬운 프론트엔드 결과물을 만드는 데 집중합니다.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <h3>HTML & Semantic Markup</h3>
+          <p>구조적인 문서 설계와 접근성을 고려한 마크업을 지향합니다.</p>
+        </div>
+        <div class="card">
+          <h3>CSS & Visual Design</h3>
+          <p>그라데이션, 카드 UI, 반응형 레이아웃, 섬세한 간격과 계층 표현에 강점을 둡니다.</p>
+        </div>
+        <div class="card">
+          <h3>GitHub & Deployment</h3>
+          <p>버전 관리와 GitHub Pages 배포를 통해 작업물을 빠르게 공유하고 관리합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Projects</div>
+        <h2>프로젝트</h2>
+        <p>실제 배포 가능한 형태로 만들고, 깔끔한 화면과 빠른 공유가 가능한 결과물을 지향합니다.</p>
+      </div>
+      <div class="projects">
+        <article class="project">
+          <small>Featured Project</small>
+          <h3>Yonanss Homepage</h3>
+          <p>GitHub Pages로 배포한 개인 포트폴리오 웹사이트입니다. 감성적인 비주얼, 깔끔한 카드 레이아웃, 반응형 UI를 중심으로 구성했습니다.</p>
+          <div class="chips">
+            <span class="chip">HTML</span>
+            <span class="chip">CSS</span>
+            <span class="chip">Responsive</span>
+            <span class="chip">GitHub Pages</span>
+          </div>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://yonanss.github.io/yonanss-homepage/" target="_blank" rel="noreferrer">Live Site</a>
+            <a class="btn btn-secondary" href="https://github.com/yonanss/yonanss-homepage" target="_blank" rel="noreferrer">Source Code</a>
+          </div>
+        </article>
+        <article class="project">
+          <small>Next Step</small>
+          <h3>More Projects Coming Soon</h3>
+          <p>앞으로 더 다양한 웹 프로젝트와 실험적인 UI 작업물을 이 섹션에 계속 추가할 예정입니다. 포트폴리오를 점점 더 풍부하게 채워나갈 계획입니다.</p>
+          <div class="chips">
+            <span class="chip">JavaScript</span>
+            <span class="chip">UI Motion</span>
+            <span class="chip">Portfolio</span>
+          </div>
+          <div class="cta-row">
+            <a class="btn btn-secondary" href="https://github.com/yonanss" target="_blank" rel="noreferrer">GitHub Profile</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Contact</div>
+        <h2>함께 만들고 싶은 게 있다면</h2>
+        <p>웹사이트, 포트폴리오, 랜딩 페이지처럼 사용자에게 바로 보여지는 결과물을 더 멋지게 만들고 싶습니다.</p>
+      </div>
+      <div class="contact">
+        <div class="contact-panel">
+          <h3 style="margin-top:0; font-size:28px;">Let’s build something great.</h3>
+          <p style="color: var(--muted); line-height: 1.8;">아직 포트폴리오를 더 채워가는 중이지만, 그만큼 계속 만들고 발전시키고 있습니다. 이 페이지도 그 과정의 일부입니다.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://github.com/yonanss" target="_blank" rel="noreferrer">GitHub 방문</a>
+            <a class="btn btn-secondary" href="#top">맨 위로</a>
+          </div>
+        </div>
+        <div class="contact-panel">
+          <div class="contact-list">
+            <div class="contact-item"><strong>Name</strong><span>Yonanss</span></div>
+            <div class="contact-item"><strong>Role</strong><span>Developer</span></div>
+            <div class="contact-item"><strong>GitHub</strong><span>@yonanss</span></div>
+            <div class="contact-item"><strong>Website</strong><span>GitHub Pages</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">© 2026 Yonanss. Built with HTML, CSS and good taste.</div>
+  </footer>
 </body>
 </html>
